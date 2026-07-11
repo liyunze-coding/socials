@@ -1,0 +1,102 @@
+---
+interface Props {
+	title: string;
+	description: string;
+	thumbnail?: string;
+	metaURL?: string;
+}
+
+const { title, description, thumbnail, metaURL } = Astro.props;
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" /><meta
+			name="keywords"
+			content="Rython, student, developer, frontend, web developer, streamer, coworking"
+		/>
+		<meta name="author" content="RythonDev" />
+		<meta name="theme-color" content="#2B2D31" />
+
+		{thumbnail && <meta name="twitter:image" content={thumbnail} />}
+
+		{metaURL && <meta name="og:url" content={metaURL} />}
+
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+		<ClientRouter />
+	</body>
+</html>
+<style is:global>
+	@font-face {
+		font-family: "Fredoka";
+		src: url("/fonts/Fredoka-Regular.ttf") format("truetype");
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Antonio";
+		src: url("/fonts/Antonio-Bold.ttf") format("truetype");
+		font-weight: bold;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	/* Montserrat Fonts */
+	@font-face {
+		font-family: "Montserrat";
+		src: url("/fonts/Montserrat-Bold.ttf") format("truetype");
+		font-weight: bold;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Montserrat";
+		src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		font-family: "Montserrat", sans-serif;
+		color: #fff;
+		background: #1d1c20;
+		background:
+			radial-gradient(circle, #303030 1px, transparent 1px), #101010;
+		background-size: 20px 20px;
+	}
+</style>
+
+<script is:inline>
+	document.addEventListener("astro:page-load", () => {
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("view-appear");
+				}
+			});
+		});
+
+		const elements = document.querySelectorAll(".view-fadeUp");
+		elements.forEach((el) => {
+			observer.observe(el);
+		});
+	});
+</script>
