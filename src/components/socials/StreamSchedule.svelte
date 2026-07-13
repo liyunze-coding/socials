@@ -170,7 +170,7 @@
 	{:else}
 		<div>
 			To be announced on <a
-				href="/discord"
+				href="https://rython.dev/discord"
 				target="_blank"
 				class="underline hover:text-blue-500">Discord</a
 			>
