@@ -129,7 +129,7 @@
 		>
 		<button
 			onclick={() => (adjusted = false)}
-			class="flex-grow rounded-lg py-1
+			class="grow rounded-lg py-1
         transition-colors duration-150
         {adjusted ? 'text-gray-400' : 'bg-[#303030] text-white'}"
 			>AEST/<wbr />AEDT</button
