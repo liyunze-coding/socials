@@ -14,6 +14,136 @@ import CodePenIcon from "./_images/codepen.svg";
 import LocationIcon from "./_images/location.svg";
 import DateTimeIcon from "./_images/date-time.svg";
 import DiscordIcon from "./_images/discord.svg";
+
+type SocialLink = {
+	type: "link";
+	href: string;
+	title: string;
+	subtitle: string;
+	subtitleHtml?: string;
+	iconId: string;
+	iconClass?: string;
+	Icon?: typeof WebsiteIcon;
+	variant?: "github";
+	imgSrc?: string;
+	imgAlt?: string;
+	imgWidth?: number;
+};
+
+type GridItem =
+	| { type: "intro" }
+	| SocialLink
+	| { type: "schedule" }
+	| { type: "location" }
+	| { type: "spacer"; class: string };
+
+const gridItems: GridItem[] = [
+	{ type: "intro" },
+	{
+		type: "link",
+		href: "https://rython.dev/",
+		title: "Website",
+		subtitle: "rython.dev",
+		iconId: "website-icon",
+		iconClass: "icon-box h-12 w-12",
+		Icon: WebsiteIcon,
+	},
+	{
+		type: "link",
+		href: "https://twitch.tv/RythonDev/",
+		title: "Twitch",
+		subtitle: "RythonDev",
+		iconId: "twitch-icon",
+		iconClass: "icon-box",
+		Icon: TwitchIcon,
+	},
+	{
+		type: "link",
+		href: "https://youtube.com/@RythonDev/",
+		title: "YouTube",
+		subtitle: "@RythonDev",
+		iconId: "youtube-icon",
+		iconClass: "icon-box",
+		Icon: YouTubeIcon,
+	},
+	{
+		type: "link",
+		href: "https://instagram.com/RythonDev",
+		title: "Instagram",
+		subtitle: "@RythonDev",
+		iconId: "instagram-icon",
+		iconClass: "icon-box",
+		Icon: InstagramIcon,
+	},
+	{
+		type: "link",
+		href: "https://github.com/liyunze-coding",
+		title: "Github",
+		subtitle: "liyunze-coding",
+		iconId: "github-icon",
+		variant: "github",
+		Icon: GithubIcon,
+	},
+	{
+		type: "link",
+		href: "https://codepen.io/RythonDev",
+		title: "Codepen",
+		subtitle: "RythonDev",
+		iconId: "codepen-icon",
+		iconClass: "icon-box h-12 w-12 rounded-full",
+		Icon: CodePenIcon,
+	},
+	{ type: "schedule" },
+	{ type: "location" },
+	{
+		type: "link",
+		href: "https://ko-fi.com/rython",
+		title: "Ko-fi",
+		subtitle: "Rython",
+		iconId: "kofi-icon",
+		iconClass:
+			"icon-box flex aspect-square h-12 w-12 items-center justify-center rounded-full bg-[#00BCF2]",
+		imgSrc: "/images/socials/kofi_s_logo_nolabel.webp",
+		imgAlt: "ko-fi logo",
+		imgWidth: 28,
+	},
+	{
+		type: "link",
+		href: "https://rython.dev/discord",
+		title: "Discord",
+		subtitle: "rython.dev/discord",
+		subtitleHtml: "rython.dev/<wbr />discord",
+		iconId: "discord-icon",
+		iconClass: "icon-box",
+		Icon: DiscordIcon,
+	},
+	{ type: "spacer", class: "hidden opacity-0 lg:block" },
+	{
+		type: "link",
+		href: "https://tiktok.com/@RythonDev",
+		title: "Tiktok",
+		subtitle: "@RythonDev",
+		iconId: "tiktok-icon",
+		iconClass:
+			"icon-box flex h-12 w-12 items-center justify-center rounded-full bg-[#111]",
+		imgSrc: "/images/socials/tiktok.webp",
+		imgAlt: "tiktok logo",
+		imgWidth: 24,
+	},
+	{ type: "spacer", class: "hidden opacity-0 md:block lg:hidden" },
+	{
+		type: "link",
+		href: "https://bsky.app/profile/rython.dev",
+		title: "Bluesky",
+		subtitle: "@rython.dev",
+		iconId: "bluesky-icon",
+		iconClass:
+			"icon-box flex aspect-square h-12 w-12 items-center justify-center rounded-full bg-[linear-gradient(0deg,rgba(86,183,254,1)_0%,rgba(13,125,253,1)_100%)]",
+		imgSrc: "/images/socials/bluesky.webp",
+		imgAlt: "bluesky logo",
+		imgWidth: 35,
+	},
+];
 ---
 
 <Layout
@@ -27,333 +157,166 @@ import DiscordIcon from "./_images/discord.svg";
 				id="cards"
 				class="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4"
 			>
-				<div
-					id="intro"
-					class="social-card col-span-2 h-5xl md:col-span-3 md:h-100 lg:col-span-4"
-				>
-					<div
-						class="social-card-content flex flex-col bg-cover bg-top md:flex-row md:justify-between md:gap-3"
-					>
-						<div
-							class="mt-auto flex flex-col items-start justify-start gap-3 md:h-1/2 md:flex-row md:items-center md:gap-10"
-						>
-							<div
-								class="mb-5 flex aspect-square w-32 items-center justify-center overflow-hidden rounded-full border-2 border-solid border-white bg-[rgb(20,20,20)] md:mb-0 md:w-72"
-							>
-								<Image
-									src={profile}
-									alt="Ryan"
-									width="176"
-									class="aspect-square w-32 md:w-44"
-								/>
-							</div>
-							<div>
-								<h1 class="mb-2 text-4xl font-bold">
-									RythonDev
-								</h1>
-								<p class="text-lg text-[#ccc]">
-									I am a Malaysian Chinese content creator
-									based in Australia! I stream co-working and software development, make tech youtube tutorials,
-									and develop software for streamers and content creators!
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Website -->
-				<a href="https://rython.dev/" target="_blank">
-					<div class="social-card">
-						<div
-							class="social-card-content group flex flex-col items-start justify-between"
-						>
-							<div
-								class="absolute right-5 rotate-45 opacity-0 transition-all duration-300 ease-in-out group-hover:rotate-0 group-hover:opacity-10000"
-							>
-								<ArrowIcon />
-							</div>
-							<div id="website-icon" class="icon-box h-12 w-12">
-								<WebsiteIcon />
-							</div>
-							<div>
-								<h2 class="text-xl font-bold">Website</h2>
-								<p class="text-[#ccc]">rython.dev</p>
-							</div>
-						</div>
-					</div>
-				</a>
-				<!-- Twitch -->
-				<a href="https://twitch.tv/RythonDev/" target="_blank">
-					<div class="social-card">
-						<div
-							class="social-card-content group flex flex-col items-start justify-between"
-						>
-							<div
-								class="absolute right-5 rotate-45 opacity-0 transition-all duration-300 ease-in-out group-hover:rotate-0 group-hover:opacity-10000"
-							>
-								<ArrowIcon />
-							</div>
-							<div id="twitch-icon" class="icon-box">
-								<TwitchIcon />
-							</div>
-							<div>
-								<h2 class="text-xl font-bold">Twitch</h2>
-								<p class="text-[#ccc]">RythonDev</p>
-							</div>
-						</div>
-					</div>
-				</a>
-				<!-- YouTube -->
-				<a href="https://youtube.com/@RythonDev/" target="_blank">
-					<div class="social-card">
-						<div
-							class="social-card-content group flex flex-col items-start justify-between"
-						>
-							<div
-								class="absolute right-5 rotate-45 opacity-0 transition-all duration-300 ease-in-out group-hover:rotate-0 group-hover:opacity-10000"
-							>
-								<ArrowIcon />
-							</div>
-							<div id="youtube-icon" class="icon-box">
-								<YouTubeIcon />
-							</div>
-							<div>
-								<h2 class="text-xl font-bold">YouTube</h2>
-								<p class="text-[#ccc]">@RythonDev</p>
-							</div>
-						</div>
-					</div>
-				</a>
-				<!-- Instagram -->
-				<a href="https://instagram.com/RythonDev" target="_blank">
-					<div class="social-card">
-						<div
-							class="social-card-content group flex flex-col items-start justify-between"
-						>
-							<div
-								class="absolute right-5 rotate-45 opacity-0 transition-all duration-300 ease-in-out group-hover:rotate-0 group-hover:opacity-10000"
-							>
-								<ArrowIcon />
-							</div>
-							<div id="instagram-icon" class="icon-box">
-								<InstagramIcon />
-							</div>
-							<div>
-								<h2 class="text-xl font-bold">Instagram</h2>
-								<p class="text-[#ccc]">@RythonDev</p>
-							</div>
-						</div>
-					</div>
-				</a>
-				<!-- Github -->
-				<a href="https://github.com/liyunze-coding" target="_blank">
-					<div class="social-card">
-						<div
-							class="social-card-content group flex flex-col items-start justify-between"
-						>
-							<div
-								class="absolute right-5 rotate-45 opacity-0 transition-all duration-300 ease-in-out group-hover:rotate-0 group-hover:opacity-10000"
-							>
-								<ArrowIcon />
-							</div>
-							<div
-								class="relative z-20 h-12 w-12 rounded-full border-8 border-solid border-black bg-white"
-							>
+				{
+					gridItems.map((item) => {
+						if (item.type === "intro") {
+							return (
 								<div
-									id="github-icon"
-									class="icon-box 2-10 absolute top-1/2 left-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full"
+									id="intro"
+									class="social-card col-span-2 h-5xl md:col-span-3 md:h-100 lg:col-span-4"
 								>
-									<GithubIcon />
-								</div>
-							</div>
-							<div>
-								<h2 class="text-xl font-bold">Github</h2>
-								<p class="text-[#ccc]">liyunze-coding</p>
-							</div>
-						</div>
-					</div>
-				</a>
-				<!-- Codepen -->
-				<a href="https://codepen.io/RythonDev" target="_blank">
-					<div class="social-card">
-						<div
-							class="social-card-content group flex flex-col items-start justify-between"
-						>
-							<div
-								class="absolute right-5 rotate-45 opacity-0 transition-all duration-300 ease-in-out group-hover:rotate-0 group-hover:opacity-10000"
-							>
-								<ArrowIcon />
-							</div>
-							<div
-								id="codepen-icon"
-								class="icon-box h-12 w-12 rounded-full"
-							>
-								<CodePenIcon />
-							</div>
-							<div>
-								<h2 class="text-xl font-bold">Codepen</h2>
-								<p class="text-[#ccc]">RythonDev</p>
-							</div>
-						</div>
-					</div>
-				</a>
-				<!-- Stream Schedule -->
-				<div class="social-card col-span-2 h-fit">
-					<div
-						class="social-card-content flex flex-col items-center justify-center p-0 md:p-3"
-					>
-						<h2 class="mb-1 text-xl font-bold">Stream Schedule</h2>
-						<StreamScheduleComponent client:load />
-					</div>
-				</div>
-				<!-- Location -->
-				<div class="social-card col-span-2 md:col-span-1 lg:col-span-2">
-					<div
-						class="social-card-content flex flex-col items-start justify-center gap-5"
-					>
-						<div
-							class="flex flex-row items-center justify-center gap-3"
-						>
-							<LocationIcon />
-							<div>
-								<h2 class="text-xl font-bold">Location</h2>
-								<p class="text-[#ccc]">Melbourne, Australia</p>
-							</div>
-						</div>
-						<div
-							class="flex flex-row items-center justify-center gap-3"
-						>
-							<DateTimeIcon />
-
-							<div>
-								<h2 class="text-xl font-bold">Date & Time</h2>
-								<p class="text-[#ccc]">
-									<div id="display-date" class="text-[#ccc]">
+									<div class="social-card-content flex flex-col bg-cover bg-top md:flex-row md:justify-between md:gap-3">
+										<div class="mt-auto flex flex-col items-start justify-start gap-3 md:h-1/2 md:flex-row md:items-center md:gap-10">
+											<div class="mb-5 flex aspect-square w-32 items-center justify-center overflow-hidden rounded-full border-2 border-solid border-white bg-[rgb(20,20,20)] md:mb-0 md:w-72">
+												<Image
+													src={profile}
+													alt="Ryan"
+													width="176"
+													class="aspect-square w-32 md:w-44"
+												/>
+											</div>
+											<div>
+												<h1 class="mb-2 text-4xl font-bold">
+													RythonDev
+												</h1>
+												<p class="text-lg text-[#ccc]">
+													I am a Malaysian Chinese
+													content creator based in
+													Australia! I stream
+													co-working and software
+													development, make tech
+													youtube tutorials, and
+													develop software for
+													streamers and content
+													creators!
+												</p>
+											</div>
+										</div>
 									</div>
-									<span
-										id="time-in-aus"
-										class="text-[#ccc] uppercase"></span>
-									<span
-										id="time-difference"
-										class="text-[#ccc]"
-									>
-									</span>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Ko-fi -->
-				<a href="https://ko-fi.com/rython" target="_blank">
-					<div class="social-card">
-						<div
-							class="social-card-content group flex flex-col items-start justify-between"
-						>
-							<div
-								class="absolute right-5 rotate-45 opacity-0 transition-all duration-300 ease-in-out group-hover:rotate-0 group-hover:opacity-10000"
-							>
-								<ArrowIcon />
-							</div>
-							<div
-								id="kofi-icon"
-								class="icon-box flex aspect-square h-12 w-12 items-center justify-center rounded-full bg-[#00BCF2]"
-							>
-								<img
-									src="/images/socials/kofi_s_logo_nolabel.webp"
-									alt="ko-fi logo"
-									width="28"
-								/>
-							</div>
-							<div>
-								<h2 class="text-xl font-bold">Ko-fi</h2>
-								<p class="text-[#ccc]">Rython</p>
-							</div>
-						</div>
-					</div>
-				</a>
-				<!-- Discord -->
-				<a href="https://rython.dev/discord" target="_blank">
-					<div class="social-card">
-						<div
-							class="social-card-content group flex flex-col items-start justify-between"
-						>
-							<div
-								class="absolute right-5 rotate-45 opacity-0 transition-all duration-300 ease-in-out group-hover:rotate-0 group-hover:opacity-10000"
-							>
-								<ArrowIcon />
-							</div>
-							<div id="discord-icon" class="icon-box">
-								<DiscordIcon />
-							</div>
-							<div>
-								<h2 class="text-xl font-bold">Discord</h2>
-								<p class="text-[#ccc]">
-									rython.dev/<wbr />discord
-								</p>
-							</div>
-						</div>
-					</div>
-				</a>
-				<div class="hidden opacity-0 lg:block"></div>
-				<!-- Tiktok -->
-				<a href="https://tiktok.com/@RythonDev" target="_blank">
-					<div class="social-card">
-						<div
-							class="social-card-content group flex flex-col items-start justify-between"
-						>
-							<div
-								class="absolute right-5 rotate-45 opacity-0 transition-all duration-300 ease-in-out group-hover:rotate-0 group-hover:opacity-10000"
-							>
-								<ArrowIcon />
-							</div>
-							<div
-								id="tiktok-icon"
-								class="icon-box flex h-12 w-12 items-center justify-center rounded-full bg-[#111]"
-							>
-								<img
-									src="/images/socials/tiktok.webp"
-									alt="tiktok logo"
-									width="24"
-								/>
-							</div>
-							<div>
-								<h2 class="text-xl font-bold">Tiktok</h2>
-								<p class="text-[#ccc]">@RythonDev</p>
-							</div>
-						</div>
-					</div>
-				</a>
-				<div class="hidden opacity-0 md:block lg:hidden"></div>
-				<!-- Bluesky -->
-				<a href="https://bsky.app/profile/rython.dev" target="_blank">
-					<div class="social-card">
-						<div
-							class="social-card-content group flex flex-col items-start justify-between"
-						>
-							<div
-								class="absolute right-5 rotate-45 opacity-0 transition-all duration-300 ease-in-out group-hover:rotate-0 group-hover:opacity-10000"
-							>
-								<ArrowIcon />
-							</div>
-							<div
-								id="bluesky-icon"
-								class="icon-box flex aspect-square h-12 w-12 items-center justify-center rounded-full bg-[linear-gradient(0deg,rgba(86,183,254,1)_0%,rgba(13,125,253,1)_100%)]"
-							>
-								<img
-									src="/images/socials/bluesky.webp"
-									alt="bluesky logo"
-									width="35"
-								/>
-							</div>
-							<div>
-								<h2 class="text-xl font-bold">Bluesky</h2>
-								<p class="text-[#ccc]">@rython.dev</p>
-							</div>
-						</div>
-					</div>
-				</a>
+								</div>
+							);
+						}
+
+						if (item.type === "schedule") {
+							return (
+								<div class="social-card col-span-2 h-fit">
+									<div class="social-card-content flex flex-col items-center justify-center p-0 md:p-3">
+										<h2 class="mb-1 text-xl font-bold">
+											Stream Schedule
+										</h2>
+										<StreamScheduleComponent client:load />
+									</div>
+								</div>
+							);
+						}
+
+						if (item.type === "location") {
+							return (
+								<div class="social-card col-span-2 md:col-span-1 lg:col-span-2">
+									<div class="social-card-content flex flex-col items-start justify-center gap-5">
+										<div class="flex flex-row items-center justify-center gap-3">
+											<LocationIcon />
+											<div>
+												<h2 class="text-xl font-bold">
+													Location
+												</h2>
+												<p class="text-[#ccc]">
+													Melbourne, Australia
+												</p>
+											</div>
+										</div>
+										<div class="flex flex-row items-center justify-center gap-3">
+											<DateTimeIcon />
+											<div>
+												<h2 class="text-xl font-bold">
+													Date & Time
+												</h2>
+												<p class="text-[#ccc]">
+													<div
+														id="display-date"
+														class="text-[#ccc]"
+													/>
+													<span
+														id="time-in-aus"
+														class="text-[#ccc] uppercase"
+													/>
+													<span
+														id="time-difference"
+														class="text-[#ccc]"
+													/>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							);
+						}
+
+						if (item.type === "spacer") {
+							return <div class={item.class} />;
+						}
+
+						const Icon = item.Icon;
+
+						return (
+							<a href={item.href} target="_blank">
+								<div class="social-card">
+									<div class="social-card-content group flex flex-col items-start justify-between">
+										<div class="absolute right-5 rotate-45 opacity-0 transition-all duration-300 ease-in-out group-hover:rotate-0 group-hover:opacity-10000">
+											<ArrowIcon />
+										</div>
+										{item.variant === "github" && Icon ? (
+											<div class="relative z-20 h-12 w-12 rounded-full border-8 border-solid border-black bg-white">
+												<div
+													id={item.iconId}
+													class="icon-box 2-10 absolute top-1/2 left-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full"
+												>
+													<Icon />
+												</div>
+											</div>
+										) : item.imgSrc ? (
+											<div
+												id={item.iconId}
+												class={item.iconClass}
+											>
+												<img
+													src={item.imgSrc}
+													alt={item.imgAlt}
+													width={item.imgWidth}
+												/>
+											</div>
+										) : Icon ? (
+											<div
+												id={item.iconId}
+												class={item.iconClass}
+											>
+												<Icon />
+											</div>
+										) : null}
+										<div>
+											<h2 class="text-xl font-bold">
+												{item.title}
+											</h2>
+											{item.subtitleHtml ? (
+												<p
+													class="text-[#ccc]"
+													set:html={item.subtitleHtml}
+												/>
+											) : (
+												<p class="text-[#ccc]">
+													{item.subtitle}
+												</p>
+											)}
+										</div>
+									</div>
+								</div>
+							</a>
+						);
+					})
+				}
 			</div>
 			<div class="mx-auto mt-10 w-fit md:ml-auto">
-				Hover Light effect by
+				Hover Light effect by{" "}
 				<a
 					class="text-white underline hover:text-blue-500"
 					href="https://www.youtube.com/watch?v=htGfnF1zN4g"
